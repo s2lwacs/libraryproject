@@ -56,3 +56,9 @@
 .link-same-tab-different-style:visited {
     color: lightblue;
 }
+
+h1 {
+    background-color: #f7f7cc;
+    color: green;
+    padding: 10px;
+}

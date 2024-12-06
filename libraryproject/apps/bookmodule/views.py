@@ -21,3 +21,7 @@ def viewbook(request, bookId):
 
 def links(request):
     return render(request, 'bookmodule/links.html')
+from django.shortcuts import render
+
+def formatting(request):
+    return render(request, 'bookmodule/formatting.html')
