@@ -81,3 +81,34 @@ ol {
     padding-left: 20px;
 }
 
+table {
+    width: 50%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 10px;
+}
+
+th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+caption {
+    caption-side: top;
+    font-weight: bold;
+    padding: 5px;
+}
+
+.image-cell {
+    text-align: center;
+}
+
+img {
+    width: 300px;
+    height: auto;
+}

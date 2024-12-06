@@ -28,3 +28,6 @@ def formatting(request):
 
 def listing(request):
     return render(request, 'bookmodule/listing.html')
+
+def tables(request):
+    return render(request, 'bookmodule/tables.html')
