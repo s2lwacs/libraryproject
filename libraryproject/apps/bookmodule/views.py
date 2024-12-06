@@ -25,3 +25,6 @@ from django.shortcuts import render
 
 def formatting(request):
     return render(request, 'bookmodule/formatting.html')
+
+def listing(request):
+    return render(request, 'bookmodule/listing.html')
