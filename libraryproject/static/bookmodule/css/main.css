@@ -1,0 +1,58 @@
+/* General container styling */
+.container {
+    padding: 20px;
+    text-align: center;
+}
+
+/* Link styles */
+.link-new-tab {
+    color: red;
+    background-color: lightgreen;
+    padding: 10px;
+    display: block;
+    text-decoration: none;
+}
+
+.link-same-tab {
+    color: orange;
+    background-color: gray;
+    padding: 10px;
+    display: block;
+    text-decoration: none;
+}
+
+.link-same-tab-different-style {
+    color: white;
+    background-color: black;
+    padding: 10px;
+    display: block;
+    text-decoration: none;
+}
+
+/* Link state styling */
+.link-new-tab:hover {
+    color: darkred;
+    text-decoration: underline;
+}
+
+.link-same-tab:hover {
+    color: darkorange;
+    text-decoration: underline;
+}
+
+.link-same-tab-different-style:hover {
+    color: lightgray;
+    text-decoration: underline;
+}
+
+.link-new-tab:visited {
+    color: darkgreen;
+}
+
+.link-same-tab:visited {
+    color: brown;
+}
+
+.link-same-tab-different-style:visited {
+    color: lightblue;
+}

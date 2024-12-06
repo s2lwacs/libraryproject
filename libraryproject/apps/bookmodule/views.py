@@ -17,3 +17,7 @@ def viewbook(request, bookId):
     if book2['id'] == bookId: targetBook = book2
     context = {'book':targetBook} 
     return render(request, 'bookmodule/show.html', context)
+
+
+def links(request):
+    return render(request, 'bookmodule/links.html')
