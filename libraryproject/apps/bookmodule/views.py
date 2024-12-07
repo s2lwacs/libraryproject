@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
+from apps.bookmodule.models import Book
+
 
 # Create your views here.
 def index(request):
@@ -28,6 +30,18 @@ def search(request):
         return render(request, 'bookmodule/bookList.html', {'books':newBooks})
 
     return render(request, 'bookmodule/search.html')
+def insert_books(request):
+    # Insert data using the Constructor method
+    book1 = Book(title='Continuous Delivery', author='J. Humble and D. Farley', price=120.00, edition=3)
+    book1.save()
+
+    book2 = Book(title='Reversing: Secrets of Reverse Engineering', author='E. Eilam', price=97.00, edition=2)
+    book2.save()
+
+    book3 = Book(title='The Hundred-Page Machine Learning Book', author='Andriy Burkov', price=100.00, edition=4)
+    book3.save()
+
+    return HttpResponse("Books have been inserted successfully!")
 
 def aboutus(request):
     return render(request, 'bookmodule/aboutus.html')
