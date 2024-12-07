@@ -4,8 +4,16 @@ from django.http import HttpResponse
 
 # Create your views here.
 def index(request):
-    name = request.GET.get("name") or "world!" 
-    return render(request, "bookmodule/index.html" , {"name": name})
+    return render(request, "bookmodule/index.html")
+
+def list_books(request):
+    return render(request, 'bookmodule/list_books.html')
+
+def viewbook(request, bookId):
+    return render(request, 'bookmodule/one_book.html')
+
+def aboutus(request):
+    return render(request, 'bookmodule/aboutus.html')
 
 def index2(request, val1 = 0): 
     return HttpResponse("value1 = "+str(val1))

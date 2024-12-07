@@ -54,9 +54,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "libraryproject.urls"
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / 'static']
-
+STATIC_URL = 'static/'
+STATICFILES_DIRS = [( os.path.join(BASE_DIR, "apps/static"))]
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
