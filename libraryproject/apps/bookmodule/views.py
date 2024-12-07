@@ -43,6 +43,13 @@ def insert_books(request):
 
     return HttpResponse("Books have been inserted successfully!")
 
+def simple_query(request):
+    # Retrieve all books where the title contains "and" (case-insensitive)
+   mybooks=Book.objects.filter(title__icontains='and') # <- multiple objects
+   print(mybooks)
+   return render(request, 'bookmodule/bookList.html', {'books':mybooks})
+
+
 def aboutus(request):
     return render(request, 'bookmodule/aboutus.html')
 
