@@ -1,0 +1,79 @@
+{% extends "bookmodule/layouts/base.html" %}
+{% load static %}
+{% block title %} Search Results {% endblock title %}
+{% block stylesheets %}
+<style>
+    .container {
+        width: 80%;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    h1 {
+        color: #17a2b8;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    ul {
+        list-style-type: none;
+        padding: 0;
+    }
+    li {
+        background-color: #f8f9fa;
+        margin: 10px 0;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+    li:hover {
+        transform: scale(1.02);
+        box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+    }
+    .book-title {
+        font-size: 1.2em;
+        font-weight: bold;
+        color: #007bff;
+        text-decoration: none;
+    }
+    .book-title:hover {
+        text-decoration: underline;
+    }
+    .book-author {
+        color: #6c757d;
+    }
+    .no-results {
+        text-align: center;
+        color: #dc3545;
+        font-size: 1.2em;
+    }
+    .back-link {
+        display: inline-block;
+        margin-top: 20px;
+        color: #007bff;
+        text-decoration: none;
+        font-weight: bold;
+    }
+    .back-link:hover {
+        text-decoration: underline;
+    }
+</style>
+{% endblock stylesheets %}
+{% block content %}
+<div class="container">
+    <h1>Search Results</h1>
+    {% if books %}
+        <ul>
+            {% for book in books %}
+                <li>
+                    <a href="{% url 'books.view_one_book' book.id %}" class="book-title">{{ book.title }}</a><br>
+                    <span class="book-author"><strong>Author:</strong> {{ book.author }}</span>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="no-results">No books found matching your search criteria.</p>
+    {% endif %}
+    <a href="{% url 'books.search' %}" class="back-link">Back to Search</a>
+</div>
+{% endblock content %}
