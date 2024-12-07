@@ -49,6 +49,12 @@ def simple_query(request):
    print(mybooks)
    return render(request, 'bookmodule/bookList.html', {'books':mybooks})
 
+def lookup_query(request):
+    mybooks=books=Book.objects.filter(author__isnull =False).filter(title__icontains='and').filter(edition__gte = 2).exclude(price__lte = 100)[:10]
+    if len(mybooks)>=1:
+        return render(request, 'bookmodule/bookList.html', {'books':mybooks})
+    else:
+        return render(request, 'bookmodule/index.html')
 
 def aboutus(request):
     return render(request, 'bookmodule/aboutus.html')
