@@ -12,6 +12,9 @@ def list_books(request):
 def viewbook(request, bookId):
     return render(request, 'bookmodule/one_book.html')
 
+def search(request):
+    return render(request, 'bookmodule/search.html')
+
 def aboutus(request):
     return render(request, 'bookmodule/aboutus.html')
 
