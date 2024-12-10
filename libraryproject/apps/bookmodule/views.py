@@ -78,6 +78,13 @@ def task2(request):
     )
     return render(request, 'bookmodule/task2.html', {'books': books})
 
+def task3(request):
+    books = Book.objects.filter(
+        ~Q(edition__gt=2) & ~(Q(title__icontains='qu') | Q(author__icontains='qu'))
+    )
+    return render(request, 'bookmodule/task3.html', {'books': books})
+
+    
 def aboutus(request):
     return render(request, 'bookmodule/aboutus.html')
 
