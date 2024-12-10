@@ -84,6 +84,10 @@ def task3(request):
     )
     return render(request, 'bookmodule/task3.html', {'books': books})
 
+def task4(request):
+    books = Book.objects.all().order_by('title')  # Order books by title
+    return render(request, 'bookmodule/task4.html', {'books': books})
+    
     
 def aboutus(request):
     return render(request, 'bookmodule/aboutus.html')
