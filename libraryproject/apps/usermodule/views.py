@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.db.models import Count
 
 from django.http import HttpResponse
 from .models import Address, Student
@@ -43,3 +44,8 @@ def insert_mockup_data(request):
         student.save()
 
     return HttpResponse("Mock-up data for  students and cities has been added successfully!")
+
+
+def students_per_city(request):
+    city_data = Address.objects.annotate(student_count=Count('students'))
+    return render(request, 'usermodule/students_per_city.html', {'city_data': city_data})

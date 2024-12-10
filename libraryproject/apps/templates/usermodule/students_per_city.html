@@ -1,0 +1,28 @@
+{% extends "bookmodule/layouts/base.html" %}
+{% block title %} Students Per City {% endblock title %}
+{% block content %}
+<div class="container">
+    <h1>Number of Students Per City</h1>
+    {% if city_data %}
+        <table style="width: 100%; border-collapse: collapse;">
+            <thead>
+                <tr>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">City</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Number of Students</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for city in city_data %}
+                    <tr>
+                        <td style="border: 1px solid #ddd; padding: 8px;">{{ city.city }}</td>
+                        <td style="border: 1px solid #ddd; padding: 8px;">{{ city.student_count }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No data available.</p>
+    {% endif %}
+    <a href="{% url 'books.index' %}" class="back-link">Back to Home</a>
+</div>
+{% endblock content %}
