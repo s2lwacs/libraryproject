@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from django.db.models import Q
+
 from django.http import HttpResponse
 
 from apps.bookmodule.models import Book
@@ -31,15 +33,25 @@ def search(request):
 
     return render(request, 'bookmodule/search.html')
 def insert_books(request):
-    # Insert data using the Constructor method
-    book1 = Book(title='Continuous Delivery', author='J. Humble and D. Farley', price=120.00, edition=3)
-    book1.save()
+    # Comprehensive dataset of books
+    books = [
+        Book(title='Continuous Delivery', author='J. Humble and D. Farley', price=120.00, edition=3),
+        Book(title='Reversing: Secrets of Reverse Engineering', author='E. Eilam', price=97.00, edition=2),
+        Book(title='The Hundred-Page Machine Learning Book', author='Andriy Burkov', price=100.00, edition=4),
+        Book(title='Clean Code: A Handbook of Agile Software Craftsmanship', author='Robert C. Martin', price=50.00, edition=2),
+        Book(title='Design Patterns: Elements of Reusable Object-Oriented Software', author='Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides', price=75.00, edition=1),
+        Book(title='Artificial Intelligence: A Modern Approach', author='Stuart Russell, Peter Norvig', price=150.00, edition=3),
+        Book(title='Introduction to Algorithms', author='Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, Clifford Stein', price=85.00, edition=4),
+        Book(title='The Pragmatic Programmer: Your Journey To Mastery', author='Andrew Hunt, David Thomas', price=65.00, edition=2),
+        Book(title='Python Crash Course: A Hands-On Project-Based Introduction to Programming', author='Eric Matthes', price=40.00, edition=1),
+        Book(title='You Don’t Know JS Yet: Scope & Closures', author='Kyle Simpson', price=30.00, edition=1),
+        Book(title='Deep Learning with Python', author='Francois Chollet', price=95.00, edition=2),
+        Book(title='Cracking the Coding Interview: 189 Programming Questions and Solutions', author='Gayle Laakmann McDowell', price=45.00, edition=6)
+    ]
 
-    book2 = Book(title='Reversing: Secrets of Reverse Engineering', author='E. Eilam', price=97.00, edition=2)
-    book2.save()
-
-    book3 = Book(title='The Hundred-Page Machine Learning Book', author='Andriy Burkov', price=100.00, edition=4)
-    book3.save()
+    # Save all books to the database
+    for book in books:
+        book.save()
 
     return HttpResponse("Books have been inserted successfully!")
 
@@ -55,6 +67,10 @@ def lookup_query(request):
         return render(request, 'bookmodule/bookList.html', {'books':mybooks})
     else:
         return render(request, 'bookmodule/index.html')
+
+def task1(request):
+    books = Book.objects.filter(Q(price__lte=50))
+    return render(request, 'bookmodule/task1.html', {'books': books})
 
 def aboutus(request):
     return render(request, 'bookmodule/aboutus.html')

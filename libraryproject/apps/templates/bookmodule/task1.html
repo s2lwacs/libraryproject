@@ -1,0 +1,23 @@
+{% extends "bookmodule/layouts/base.html" %}
+{% load static %}
+{% block title %} Books Priced ≤ $50 {% endblock title %}
+{% block stylesheets %}
+{% endblock stylesheets %}
+{% block content %}
+<div class="container">
+    <h1>Books Priced ≤ $50</h1>
+    {% if books %}
+        {% for book in books %}
+            <div class="book-item">
+                <p><a href="{% url 'books.view_one_book' book.id %}" class="book-title">{{ book.title }}</a></p>
+                <p class="book-author"><strong>Author:</strong> {{ book.author }}</p>
+                <p class="book-price"><strong>Price:</strong> ${{ book.price }}</p>
+                <p class="book-edition"><strong>Edition:</strong> {{ book.edition }}</p>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p class="no-results">No books priced at or below $50.</p>
+    {% endif %}
+    <a href="{% url 'books.index' %}" class="back-link">Back to Home</a>
+</div>
+{% endblock content %}

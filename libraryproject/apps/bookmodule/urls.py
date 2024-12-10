@@ -14,5 +14,6 @@ path('search/', views.search, name="books.search"),
  path('insert_books/', views.insert_books, name='insert_books'),
   path('simple/query/', views.simple_query, name='books.simple_query'),
       path('complex/query/', views.lookup_query, name='books.lookup_query'),
+      path('lab8/task1/', views.task1, name='books.task1')
 
 ]
