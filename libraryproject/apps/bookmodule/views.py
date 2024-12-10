@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.db.models import Q
+from django.db.models import Count, Sum, Avg, Max, Min
 
 from django.http import HttpResponse
 
@@ -87,7 +88,16 @@ def task3(request):
 def task4(request):
     books = Book.objects.all().order_by('title')  # Order books by title
     return render(request, 'bookmodule/task4.html', {'books': books})
-    
+
+def task5(request):
+    aggregation = Book.objects.aggregate(
+        total_books=Count('id'),
+        total_price=Sum('price'),
+        avg_price=Avg('price'),
+        max_price=Max('price'),
+        min_price=Min('price')
+    )
+    return render(request, 'bookmodule/task5.html', {'aggregation': aggregation}) 
     
 def aboutus(request):
     return render(request, 'bookmodule/aboutus.html')

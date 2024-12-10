@@ -1,0 +1,15 @@
+{% extends "bookmodule/layouts/base.html" %}
+{% block title %} Aggregation Results {% endblock title %}
+{% block content %}
+<div class="container">
+    <h1>Book Aggregation Results</h1>
+    <ul>
+        <li><strong>Total Number of Books:</strong> {{ aggregation.total_books }}</li>
+        <li><strong>Total Price of All Books:</strong> ${{ aggregation.total_price }}</li>
+        <li><strong>Average Price:</strong> ${{ aggregation.avg_price }}</li>
+        <li><strong>Maximum Price:</strong> ${{ aggregation.max_price }}</li>
+        <li><strong>Minimum Price:</strong> ${{ aggregation.min_price }}</li>
+    </ul>
+    <a href="{% url 'books.index' %}" class="back-link">Back to Home</a>
+</div>
+{% endblock content %}
