@@ -72,6 +72,12 @@ def task1(request):
     books = Book.objects.filter(Q(price__lte=50))
     return render(request, 'bookmodule/task1.html', {'books': books})
 
+def task2(request):
+    books = Book.objects.filter(
+        Q(edition__gt=2) & (Q(title__icontains='qu') | Q(author__icontains='qu'))
+    )
+    return render(request, 'bookmodule/task2.html', {'books': books})
+
 def aboutus(request):
     return render(request, 'bookmodule/aboutus.html')
 
