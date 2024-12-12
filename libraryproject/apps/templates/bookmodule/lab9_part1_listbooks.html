@@ -31,9 +31,11 @@
                 <td>
                     <div class="btn-group">
                         <a href="{% url 'lab9_part1_editbook' book.id %}" class="btn">Edit</a>
-                        <a href="{% url 'lab9_part1_deletebook' book.id %}" class="btn btn-danger">Delete</a>
+                        <a href="{% url 'lab9_part1_deletebook' book.id %}" class="btn btn-danger" 
+                           onclick="return confirm('Are you sure you want to delete this book?');">Delete</a>
                     </div>
                 </td>
+                
             </tr>
             {% endfor %}
         </tbody>

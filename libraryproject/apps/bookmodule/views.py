@@ -139,8 +139,14 @@ def edit_book(request, book_id):
     return render(request, 'bookmodule/lab9_part1_editbook.html', {'book': book})
 
 def delete_book(request, book_id):
-    return HttpResponse(f"Delete Book functionality for book ID {book_id} goes here.")
-
+    # Retrieve the book object or return a 404 error if not found
+    book = get_object_or_404(Book, id=book_id)
+    
+    # Delete the book
+    book.delete()
+    
+    # Redirect to the book list page after deletion
+    return redirect('lab9_part1_listbooks')
 
 def aboutus(request):
     return render(request, 'bookmodule/aboutus.html')
