@@ -104,15 +104,31 @@ def list_books_crud(request):
     return render(request, 'bookmodule/lab9_part1_listbooks.html', {'books': books})
 
 def add_book(request):
-    return HttpResponse("Add Book functionality goes here.")
+    if request.method == 'POST':
+        # Get form data from POST request
+        title = request.POST.get('title')
+        author = request.POST.get('author')
+        price = request.POST.get('price')
+        edition = request.POST.get('edition')
 
+        # Create a new book object and save it
+        new_book = Book(title=title, author=author, price=price, edition=edition)
+        new_book.save()
+        
+        books = Book.objects.all()
+
+        return list_books_crud(request)
+
+    # If GET request, render the add book form
+    return render(request, 'bookmodule/lab9_part1_addbook.html')
+    
 def edit_book(request, book_id):
     return HttpResponse(f"Edit Book functionality for book ID {book_id} goes here.")
 
 def delete_book(request, book_id):
     return HttpResponse(f"Delete Book functionality for book ID {book_id} goes here.")
 
-    
+
 def aboutus(request):
     return render(request, 'bookmodule/aboutus.html')
 
