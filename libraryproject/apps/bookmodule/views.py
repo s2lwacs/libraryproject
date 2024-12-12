@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.db.models import Q
 from django.db.models import Count, Sum, Avg, Max, Min
 
@@ -115,15 +115,28 @@ def add_book(request):
         new_book = Book(title=title, author=author, price=price, edition=edition)
         new_book.save()
         
-        books = Book.objects.all()
 
         return list_books_crud(request)
 
     # If GET request, render the add book form
     return render(request, 'bookmodule/lab9_part1_addbook.html')
-    
+
 def edit_book(request, book_id):
-    return HttpResponse(f"Edit Book functionality for book ID {book_id} goes here.")
+    # Retrieve the book object or return a 404 error if not found
+    book = get_object_or_404(Book, id=book_id)
+
+    if request.method == 'POST':
+        # Update book fields from the form data
+        book.title = request.POST.get('title')
+        book.author = request.POST.get('author')
+        book.price = request.POST.get('price')
+        book.edition = request.POST.get('edition')
+        book.save()  # Save changes to the database
+
+        return list_books_crud(request)
+
+    # If GET request, render the edit form with current book data
+    return render(request, 'bookmodule/lab9_part1_editbook.html', {'book': book})
 
 def delete_book(request, book_id):
     return HttpResponse(f"Delete Book functionality for book ID {book_id} goes here.")
