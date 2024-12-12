@@ -99,6 +99,20 @@ def task5(request):
     )
     return render(request, 'bookmodule/task5.html', {'aggregation': aggregation}) 
     
+def list_books_crud(request):
+    books = Book.objects.all()
+    return render(request, 'bookmodule/lab9_part1_listbooks.html', {'books': books})
+
+def add_book(request):
+    return HttpResponse("Add Book functionality goes here.")
+
+def edit_book(request, book_id):
+    return HttpResponse(f"Edit Book functionality for book ID {book_id} goes here.")
+
+def delete_book(request, book_id):
+    return HttpResponse(f"Delete Book functionality for book ID {book_id} goes here.")
+
+    
 def aboutus(request):
     return render(request, 'bookmodule/aboutus.html')
 

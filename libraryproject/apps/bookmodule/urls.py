@@ -19,5 +19,8 @@ path('search/', views.search, name="books.search"),
       path('lab8/task3/', views.task3, name='books.task3'),
       path('lab8/task4/', views.task4, name='books.task4'),
       path('lab8/task5/', views.task5, name='books.task5'),
-
+ path('lab9_part1/listbooks/', views.list_books_crud, name='lab9_part1_listbooks'),
+ path('lab9_part1/addbook/', views.add_book, name='lab9_part1_addbook'),
+    path('lab9_part1/editbook/<int:book_id>/', views.edit_book, name='lab9_part1_editbook'),
+    path('lab9_part1/deletebook/<int:book_id>/', views.delete_book, name='lab9_part1_deletebook'),
 ]

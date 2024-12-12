@@ -16,6 +16,10 @@ celerybeat-schedule.*
 env/
 venv/
 ENV/
+pyvenv
+djangoenv/
+/djangoenv/
+/djangoenv/lib/
 env.bak/
 venv.bak/
 .mypy_cache/
