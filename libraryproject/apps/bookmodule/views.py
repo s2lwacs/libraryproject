@@ -1,10 +1,12 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.db.models import Q
 from django.db.models import Count, Sum, Avg, Max, Min
+from .forms import BookForm 
 
 from django.http import HttpResponse
 
 from apps.bookmodule.models import Book
+
 
 
 # Create your views here.
@@ -147,6 +149,40 @@ def delete_book(request, book_id):
     
     # Redirect to the book list page after deletion
     return redirect('lab9_part1_listbooks')
+
+def list_books_crud_part2(request):
+    books = Book.objects.all()
+    return render(request, 'bookmodule/lab9_part2_listbooks.html', {'books': books})
+
+def add_book_part2(request):
+    if request.method == 'POST':
+        form = BookForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('lab9_part2_listbooks')
+    else:
+        form = BookForm()
+
+    return render(request, 'bookmodule/lab9_part2_addbook.html', {'form': form})
+
+def edit_book_part2(request, book_id):
+    book = get_object_or_404(Book, id=book_id)
+
+    if request.method == 'POST':
+        form = BookForm(request.POST, instance=book)
+        if form.is_valid():
+            form.save()
+            return redirect('lab9_part2_listbooks')
+    else:
+        form = BookForm(instance=book)
+
+    return render(request, 'bookmodule/lab9_part2_editbook.html', {'form': form, 'book': book})
+
+def delete_book_part2(request, book_id):
+    book = get_object_or_404(Book, id=book_id)
+    book.delete()
+    return redirect('lab9_part2_listbooks')
+
 
 def aboutus(request):
     return render(request, 'bookmodule/aboutus.html')

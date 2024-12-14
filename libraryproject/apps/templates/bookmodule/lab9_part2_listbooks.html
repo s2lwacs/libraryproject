@@ -1,0 +1,36 @@
+{% extends "bookmodule/layouts/base.html" %}
+{% block title %} Book List (Part 2) {% endblock title %}
+{% block content %}
+<div class="container">
+    <h1>Books List (With Django Forms)</h1>
+    <a href="{% url 'lab9_part2_addbook' %}" class="btn btn-success">Add New Book</a>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Price</th>
+                <th>Edition</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in books %}
+            <tr>
+                <td>{{ book.id }}</td>
+                <td>{{ book.title }}</td>
+                <td>{{ book.author }}</td>
+                <td>${{ book.price }}</td>
+                <td>{{ book.edition }}</td>
+                <td>
+                    <a href="{% url 'lab9_part2_editbook' book.id %}" class="btn btn-primary">Edit</a>
+                    <a href="{% url 'lab9_part2_deletebook' book.id %}" class="btn btn-danger" 
+                       onclick="return confirm('Are you sure you want to delete this book?');">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock content %}
