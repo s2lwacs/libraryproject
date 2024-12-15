@@ -1,0 +1,38 @@
+{% extends "bookmodule/layouts/base.html" %}
+{% block title %} Students List {% endblock title %}
+{% block content %}
+<div class="container">
+    <h1>Students List (Many-to-Many)</h1>
+    <a href="{% url 'add_student2' %}" class="btn btn-success">Add New Student</a>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Addresses</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for student in students %}
+            <tr>
+                <td>{{ student.id }}</td>
+                <td>{{ student.name }}</td>
+                <td>{{ student.age }}</td>
+                <td>
+                    {% for address in student.addresses.all %}
+                        {{ address.city }}{% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                </td>
+                <td>
+                    <a href="{% url 'edit_student2' student.id %}" class="btn btn-primary">Edit</a>
+                    <a href="{% url 'delete_student2' student.id %}" class="btn btn-danger" 
+                       onclick="return confirm('Are you sure you want to delete this student?');">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock content %}
