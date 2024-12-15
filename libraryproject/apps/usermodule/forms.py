@@ -23,3 +23,13 @@ class Student2Form(forms.ModelForm):
             'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter student name'}),
             'age': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Enter student age'}),
         }
+from .models import Gallery
+
+class GalleryForm(forms.ModelForm):
+    class Meta:
+        model = Gallery
+        fields = ['title', 'description', 'image']
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter title'}),
+            'description': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Enter description'}),
+        }

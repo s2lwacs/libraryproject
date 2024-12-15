@@ -32,3 +32,11 @@ class Student2(models.Model):
     addresses = models.ManyToManyField(Address2, related_name='students')
     def __str__(self):
         return self.name
+
+class Gallery(models.Model):
+    title = models.CharField(max_length=100)
+    description = models.TextField(blank=True)
+    image = models.ImageField(upload_to='gallery/')
+
+    def __str__(self):
+        return self.title

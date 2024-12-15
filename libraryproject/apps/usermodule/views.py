@@ -2,7 +2,7 @@ from django.shortcuts import render,get_object_or_404
 from django.db.models import Count
 
 from django.http import HttpResponse
-from .models import Address, Address2, Student, Student2
+from .models import Address, Address2, Gallery, Student, Student2
 
 # Create your views here.
 def index(request):
@@ -50,7 +50,7 @@ def students_per_city(request):
     city_data = Address.objects.annotate(student_count=Count('students'))
     return render(request, 'usermodule/students_per_city.html', {'city_data': city_data})
 
-from .forms import Student2Form, StudentForm
+from .forms import GalleryForm, Student2Form, StudentForm
 
 def list_students(request):
     students = Student.objects.select_related('address').all()
@@ -114,3 +114,27 @@ def delete_student2(request, student_id):
     student = get_object_or_404(Student2, id=student_id)
     student.delete()
     return list_students2(request)
+
+
+def list_gallery(request):
+    images = Gallery.objects.all()
+    return render(request, 'usermodule/gallery_list.html', {'images': images})
+
+def add_image(request):
+    if request.method == 'POST':
+        form = GalleryForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return list_gallery(request)
+    else:
+        form = GalleryForm()
+
+    return render(request, 'usermodule/gallery_form.html', {'form': form, 'title': 'Add Image'})
+
+
+def delete_image(request, image_id):
+    image = get_object_or_404(Gallery, id=image_id)
+    image.delete()
+    return list_gallery(request)
+
+    
