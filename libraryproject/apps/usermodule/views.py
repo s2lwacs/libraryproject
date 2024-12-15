@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404
 from django.db.models import Count
 
 from django.http import HttpResponse
@@ -49,3 +49,35 @@ def insert_mockup_data(request):
 def students_per_city(request):
     city_data = Address.objects.annotate(student_count=Count('students'))
     return render(request, 'usermodule/students_per_city.html', {'city_data': city_data})
+
+from .forms import StudentForm
+
+def list_students(request):
+    students = Student.objects.select_related('address').all()
+    return render(request, 'usermodule/student_list.html', {'students': students})
+
+def add_student(request):
+    if request.method == 'POST':
+        form = StudentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return list_students(request)
+    else:
+        form = StudentForm()
+    return render(request, 'usermodule/student_form.html', {'form': form, 'title': 'Add Student'})
+
+def edit_student(request, student_id):
+    student = get_object_or_404(Student, id=student_id)
+    if request.method == 'POST':
+        form = StudentForm(request.POST, instance=student)
+        if form.is_valid():
+            form.save()
+            return list_students(request)
+    else:
+        form = StudentForm(instance=student)
+    return render(request, 'usermodule/student_form.html', {'form': form, 'title': 'Edit Student'})
+
+def delete_student(request, student_id):
+    student = get_object_or_404(Student, id=student_id)
+    student.delete()
+    return redirect('list_students')
