@@ -5,6 +5,8 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import render,get_object_or_404
 from django.db.models import Count
 from .forms import RegisterForm
+from django.contrib.auth.decorators import login_required
+
 
 from django.http import HttpResponse
 from .models import Address, Address2, Gallery, Student, Student2
@@ -57,11 +59,12 @@ def students_per_city(request):
 
 from .forms import GalleryForm, Student2Form, StudentForm
 
+@login_required(login_url='/users/login')
 def list_students(request):
     students = Student.objects.select_related('address').all()
     return render(request, 'usermodule/student_list.html', {'students': students})
 
-
+@login_required(login_url='/users/login')
 def add_student(request):
     if request.method == 'POST':
         form = StudentForm(request.POST)
@@ -72,6 +75,7 @@ def add_student(request):
         form = StudentForm()
     return render(request, 'usermodule/student_form.html', {'form': form, 'title': 'Add Student'})
 
+@login_required(login_url='/users/login')
 def edit_student(request, student_id):
     student = get_object_or_404(Student, id=student_id)
     if request.method == 'POST':
@@ -83,15 +87,18 @@ def edit_student(request, student_id):
         form = StudentForm(instance=student)
     return render(request, 'usermodule/student_form.html', {'form': form, 'title': 'Edit Student'})
 
+@login_required(login_url='/users/login')
 def delete_student(request, student_id):
     student = get_object_or_404(Student, id=student_id)
     student.delete()
     return list_students(request)
 
+@login_required(login_url='/users/login')
 def list_students2(request):
     students = Student2.objects.all()
     return render(request, 'usermodule/student2_list.html', {'students': students})
 
+@login_required(login_url='/users/login')
 def add_student2(request):
     if request.method == 'POST':
         form = Student2Form(request.POST)
@@ -103,6 +110,7 @@ def add_student2(request):
 
     return render(request, 'usermodule/student2_form.html', {'form': form, 'title': 'Add Student'})
 
+@login_required(login_url='/users/login')
 def edit_student2(request, student_id):
     student = get_object_or_404(Student2, id=student_id)
     if request.method == 'POST':
@@ -115,12 +123,13 @@ def edit_student2(request, student_id):
 
     return render(request, 'usermodule/student2_form.html', {'form': form, 'title': 'Edit Student'})
 
+@login_required(login_url='/users/login')
 def delete_student2(request, student_id):
     student = get_object_or_404(Student2, id=student_id)
     student.delete()
     return list_students2(request)
 
-
+@login_required(login_url='/users/login')
 def list_gallery(request):
     images = Gallery.objects.all()
     return render(request, 'usermodule/gallery_list.html', {'images': images})
