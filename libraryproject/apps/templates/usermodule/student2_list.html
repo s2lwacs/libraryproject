@@ -1,7 +1,7 @@
 {% extends "bookmodule/layouts/base.html" %}
 {% block title %} Students List {% endblock title %}
-<a href="{% url 'users.logout' %}">Logout</a>
 {% block content %}
+<a href="{% url 'users.logout' %}">Logout</a>
 <div class="container">
     <h1>Students List (Many-to-Many)</h1>
     <a href="{% url 'add_student2' %}" class="btn btn-success">Add New Student</a>

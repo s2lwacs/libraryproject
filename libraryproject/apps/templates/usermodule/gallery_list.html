@@ -1,7 +1,7 @@
 {% extends "bookmodule/layouts/base.html" %}
 {% block title %} Gallery {% endblock title %}
-<a href="{% url 'users.logout' %}">Logout</a>
 {% block content %}
+<a href="{% url 'users.logout' %}">Logout</a>
 <div class="container">
     <h1>Gallery</h1>
     <a href="{% url 'add_image' %}" class="btn btn-success">Add New Image</a>

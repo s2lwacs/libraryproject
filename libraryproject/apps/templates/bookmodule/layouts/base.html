@@ -16,6 +16,13 @@ awesome/4.7.0/css/font-awesome.min.css">
 <body>
 {% include "bookmodule/includes/header.html" %}
 {% block content %} {% endblock content %}
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">
+      {{ message }}
+    </div>
+  {% endfor %}
+{% endif %}
 {% include "bookmodule/includes/footer.html" %}
 </body>
 </html>
