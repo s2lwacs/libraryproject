@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate
 import django.contrib.auth as at
 from django.contrib.auth.forms import AuthenticationForm
-from django.shortcuts import render,get_object_or_404
+from django.shortcuts import render,get_object_or_404,redirect
 from django.db.models import Count
 from .forms import RegisterForm
 from django.contrib.auth.decorators import login_required
@@ -173,6 +173,14 @@ def login(request):
             user = form.get_user()
             at.login(request, user)
             messages.success(request, "Login successful.")
+            return redirect('/users/students')
+
     else:
         form = AuthenticationForm()
     return render(request, 'usermodule/login.html', {'form': form})
+    
+
+def logout(request):
+    at.logout(request)
+    messages.info(request, "User Logged out")
+    return redirect('/users/login')
