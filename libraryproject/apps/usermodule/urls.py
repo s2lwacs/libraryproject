@@ -18,6 +18,8 @@ urlpatterns = [
     path('gallery/add/', views.add_image, name='add_image'),
     path('gallery/delete/<int:image_id>/', views.delete_image, name='delete_image'),
         path('register', views.register, name='users.register'),
+            path('login', views.login, name='users.login'),
+
 
 
 ]

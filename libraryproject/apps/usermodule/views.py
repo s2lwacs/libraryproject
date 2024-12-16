@@ -1,4 +1,7 @@
 from django.contrib import messages
+from django.contrib.auth import authenticate
+import django.contrib.auth as at
+from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import render,get_object_or_404
 from django.db.models import Count
 from .forms import RegisterForm
@@ -152,3 +155,15 @@ def register(request):
     else:
         form = RegisterForm()
     return render(request, 'usermodule/register.html', {'form': form})
+
+
+def login(request):
+    if request.method == "POST":
+        form = AuthenticationForm(data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            at.login(request, user)
+            messages.success(request, "Login successful.")
+    else:
+        form = AuthenticationForm()
+    return render(request, 'usermodule/login.html', {'form': form})
