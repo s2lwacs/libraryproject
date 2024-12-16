@@ -1,5 +1,6 @@
 from django import forms
 from .models import Student,Student2, Address,Address2
+from django.contrib.auth.models import User
 
 class StudentForm(forms.ModelForm):
     class Meta:
@@ -33,3 +34,22 @@ class GalleryForm(forms.ModelForm):
             'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter title'}),
             'description': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Enter description'}),
         }
+
+
+
+
+class RegisterForm(forms.ModelForm):
+    pw1 = forms.CharField(label='Password', widget=forms.PasswordInput)
+    pw2 = forms.CharField(label='Password Confirmation', widget=forms.PasswordInput)
+
+    class Meta:
+        model = User
+        fields = ['username', 'email']
+
+    def clean(self):
+        cleaned_data = super().clean()
+        passw1 = cleaned_data.get('pw1')
+        passw2 = cleaned_data.get('pw2')
+        if passw1 and passw2 and passw1 != passw2:
+            self.add_error('pw2', 'Passwords do not match.')
+        return cleaned_data

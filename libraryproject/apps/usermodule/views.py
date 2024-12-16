@@ -1,5 +1,7 @@
+from django.contrib import messages
 from django.shortcuts import render,get_object_or_404
 from django.db.models import Count
+from .forms import RegisterForm
 
 from django.http import HttpResponse
 from .models import Address, Address2, Gallery, Student, Student2
@@ -138,3 +140,15 @@ def delete_image(request, image_id):
     return list_gallery(request)
 
     
+
+def register(request):
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.set_password(form.cleaned_data['pw1'])
+            user.save()
+            messages.success(request, "Registeration Successful .")
+    else:
+        form = RegisterForm()
+    return render(request, 'usermodule/register.html', {'form': form})
